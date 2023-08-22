@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="Route">
+                <Key>
+                    <PropertyRef Name="RouteId"/>
+                </Key>
+                <Property Name="RouteId" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="RouteName" Type="Edm.String" isUnique="false"/>
+                <Property Name="StartedFrom" Type="Edm.String" isUnique="false"/>
+                <Property Name="EndsAt" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Bus">
+                <Key>
+                    <PropertyRef Name="BusId"/>
+                </Key>
+                <Property Name="BusId" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="BusName" Type="Edm.String" isUnique="false"/>
+                <Property Name="DriverName" Type="Edm.String" isUnique="false"/>
+                <Property Name="BusNumber" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Route" Type="Model.Route"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Routes" EntityType="Model.Route"/>
+                <EntitySet Name="Buses" EntityType="Model.Bus">
+                    <NavigationPropertyBinding Path="Route" Target="Routes"/>
+                </EntitySet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
